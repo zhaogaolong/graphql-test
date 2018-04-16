@@ -3,7 +3,6 @@ package api
 import (
 	"context"
 
-	graphql "github.com/graph-gophers/graphql-go"
 	"github.com/jinzhu/gorm"
 )
 
@@ -40,8 +39,14 @@ func (u *User) NAME() *string {
 	return &u.Name
 }
 
-func (u *User) ID(ctx context.Context) *graphql.ID {
-	userId := graphql.ID(u.Model.ID)
+func (u *User) ID(ctx context.Context) *int32 {
+	// return &u.Model.ID
+	// fmt.Println(u.Model.ID)
+	userId := int32(u.Model.ID)
 	return &userId
+	// userId := graphql.ID(base64.StdEncoding.EncodeToString([]byte(string(u.Model.ID))))
+	// return &userId
 
+	// x := graphql.ID("dfsdfsdf")
+	// return &x
 }
