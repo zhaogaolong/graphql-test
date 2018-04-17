@@ -5,6 +5,7 @@ schema {
 
 type Query {
     getUser(id: Int!): User
+    getUsers(): [User]
     hello(): String
 }
 

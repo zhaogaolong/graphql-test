@@ -15,6 +15,10 @@ func (r *Resolver) GetUser(ctx context.Context, arg struct{ ID int32 }) (*User, 
 	return db.getUser(ctx, int32(arg.ID))
 }
 
+func (r *Resolver) GetUsers(ctx context.Context) (*[]*User, error) {
+	return db.getUsers(ctx)
+}
+
 // func (r *Resolver) CreateUser(arg struct{ name string }) (*User, error) {
 // 	var user User
 // 	user.name = arg.name

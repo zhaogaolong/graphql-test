@@ -56,5 +56,14 @@ func (db *DB) getUser(ctx context.Context, id int32) (*User, error) {
 		return nil, err
 	}
 	return &user, nil
+}
 
+func (db *DB) getUsers(ctx context.Context) (*[]*User, error) {
+	var users []*User
+
+	err := db.DB.Limit(10).Find(&users).Error
+	if err != nil {
+		return nil, err
+	}
+	return &users, nil
 }
