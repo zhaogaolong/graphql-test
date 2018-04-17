@@ -67,3 +67,15 @@ func (db *DB) getUsers(ctx context.Context) (*[]*User, error) {
 	}
 	return &users, nil
 }
+
+func (db *DB) createUser(ctx context.Context, name string) (*User, error) {
+	user := User{
+		Name: name,
+	}
+
+	err := db.DB.Create(&user).Error
+	if err != nil {
+		return nil, err
+	}
+	return &user, nil
+}

@@ -11,20 +11,17 @@ type User struct {
 	Name string
 }
 
-func (r *Resolver) GetUser(ctx context.Context, arg struct{ ID int32 }) (*User, error) {
-	return db.getUser(ctx, int32(arg.ID))
+func (r *Resolver) GetUser(ctx context.Context, args struct{ Id int32 }) (*User, error) {
+	return db.getUser(ctx, int32(args.Id))
 }
 
 func (r *Resolver) GetUsers(ctx context.Context) (*[]*User, error) {
 	return db.getUsers(ctx)
 }
 
-// func (r *Resolver) CreateUser(arg struct{ name string }) (*User, error) {
-// 	var user User
-// 	user.name = arg.name
-// 	user.id = 2
-// 	return &user, nil
-// }
+func (r *Resolver) CreateUser(ctx context.Context, args struct{ Name string }) (*User, error) {
+	return db.createUser(ctx, args.Name)
+}
 
 func (r *Resolver) Hello() *string {
 	data := "Hello world!"
@@ -39,7 +36,7 @@ func (r *Resolver) Hello() *string {
 // 	r := int32(u.id)
 // 	return &r
 // }
-func (u *User) NAME() *string {
+func (u *User) NAME(ctx context.Context) *string {
 	return &u.Name
 }
 
